@@ -1,4 +1,3 @@
-
 let tokenData = { "hash": "0x311212f7717479a0afde9357db37dbb6de85321e6529900b191d7dda3ad89e8e" };
 
 // var DEFAULT_SIZE = 1000
