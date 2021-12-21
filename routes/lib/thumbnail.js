@@ -36,7 +36,7 @@ module.exports = async (tokenId) => {
         // this way it stores browser object in higher scope. making it accessible and preventing creating new browser for each run.
         if (!browser) {
             browser = await puppeteer.launch({
-                defaultViewport: {width: 275, height: 275},
+                defaultViewport: {width: 500, height: 500},
                 headless: true,
                 args: ['--no-sandbox'],
             });

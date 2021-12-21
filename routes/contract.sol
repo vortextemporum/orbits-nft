@@ -1911,7 +1911,7 @@ library SafeMath {
 
 
 
-// THIS CONTRACT IS A FORK OF CHAINPOTS BY MEMORYC0LLLECTOR - https://chainpots.com/
+// THIS CONTRACT IS A FORK OF REDEMPTION BY MEMORYC0LLLECTOR - https://redemptionnft.art/
 
 
 
@@ -1933,6 +1933,9 @@ contract Orbits is ERC721, Ownable {
     string public IPFS_GENERATOR_ADDRESS;
     string public script;
 
+
+    string public constant ORBITS_LICENSE = "YOUR ørß1t$, YOUR CALL. If you own an ørß1t$ NFT, you are fully permitted to do whatever you want with it (including both non-commercial/commercial uses). You can even do paid fortune telling with it lol.  Also, creative derivative works are highly encouraged.";
+
     mapping(uint => string) public scripts;
 
     uint public constant PRICE = 66600000000000000;
@@ -1943,13 +1946,19 @@ contract Orbits is ERC721, Ownable {
     uint public TOTAL_DISCOUNT = 128;
 
     constructor() ERC721("ORBITS","ORB")  {
-        // setBaseURI("https://redemptionnft.art/api/token/");
+        // setBaseURI("https://orbits.wtf/api/token/");
         _safeMint(msg.sender, 0);
         creationDates[0] = block.number;
         creators[0] = msg.sender;
         // script = "class Random{constructor(e){this.seed=e}random_dec(){return this.seed^=this.seed<<13,this.seed^=this.seed>>17,this.seed^=this.seed<<5,(this.seed<0?1+~this.seed:this.seed)%1e3/1e3}random_between(e,t){return e+(t-e)*this.random_dec()}random_int(e,t){return Math.floor(this.random_between(e,t+1))}random_choice(e){return e[Math.floor(this.random_between(0,.99*e.length))]}}let tiles,tileWidth,tileHeight,palette,tokenData=window.tokenHash,seed=parseInt(tokenData.slice(0,16),16),rng=new Random(seed),VP=Math.min(window.innerHeight,window.innerWidth),WIDTH=VP,HEIGHT=VP,randomness=[],palettes=['FDFDFD-EAEAEA-D8D8D8-C6C6C6-B4B4B4','d3d4d9-4b88a2-bb0a21-252627-fff9fb','c8ffbe-edffab-ba9593-89608e-623b5a','ff9f1c-ffbf69-ffffff-cbf3f0-2ec4b6','555358-5f6062-7b7263-c6ca53-c9dcb3','540d6e-ee4266-ffd23f-f3fcf0-1f271b','1e91d6-0072bb-8fc93a-e4cc37-e18335','ea7af4-b43e8f-6200b3-3b0086-290628','5b5b5b-7d7c7a-c9c19f-edf7d2-edf7b5','333333-839788-eee0cb-baa898-bfd7ea','585123-eec170-f2a65a-f58549-772f1a','fbf5f3-e28413-000022-de3c4b-c42847','0fa3b1-d9e5d6-eddea4-f7a072-ff9b42','10002b-240046-5a189a-9d4edd-e0aaff','0466c8-023e7d-001845-33415c-7d8597','861657-a64253-d56aa0-bbdbb4-fcf0cc','493843-61988e-a0b2a6-cbbfbb-eabda8','031d44-04395e-70a288-dab785-d5896f','ff0a54-ff5c8a-ff85a1-fbb1bd-f7cad0','463f3a-8a817c-bcb8b1-f4f3ee-e0afa0','dd6e42-e8dab2-4f6d7a-c0d6df-eaeaea','ffd6ff-e7c6ff-c8b6ff-b8c0ff-bbd0ff','aa8f66-ed9b40-ffeedb-61c9a8-ba3b46','a57548-fcd7ad-f6c28b-5296a5-82ddf0','713e5a-63a375-edc79b-d57a66-ca6680','114b5f-456990-e4fde1-f45b69-6b2737','edf2fb-e2eafc-ccdbfd-c1d3fe-abc4ff','9cafb7-ead2ac-fe938c-e6b89c-4281a4','7bdff2-b2f7ef-eff7f6-f7d6e0-f2b5d4','ffcdb2-ffb4a2-e5989b-b5838d-6d6875','f2d7ee-d3bcc0-a5668b-69306d-0e103d','ffbe0b-fb5607-ff006e-8338ec-3a86ff','9b5de5-f15bb5-fee440-00bbf9-00f5d4','fee440-f15bb5-9b5de5-00bbf9-00f5d4','181a99-5d93cc-454593-e05328-e28976','F61067-5E239D-00F0B5-6DECAF-F4F4ED','f8f9fa-dee2e6-adb5bd-495057-212529','212529-000000-adb5bd-495057-f8f9fa'].map(e=>e.split('-').map(e=>'#'+e)),tileColors=[],arc$=[],arc$2=[],isFlipping=[],isRounded=!1,radius=0,offs=[],cellColors=[],psuedoFrame=1;function setup(){noiseSeed(seed),randomSeed(seed),createCanvas(WIDTH,HEIGHT),frameRate(60),colorMode(RGB),palette=rng.random_choice(palettes),background(palette[0]),stroke(palette[0]),strokeWeight(0),tiles=rng.random_int(2,16),tileWidth=WIDTH/tiles,tileHeight=HEIGHT/tiles;for(let e=0;e<=tiles;e++){let e=new Array(tiles).fill(null),t=new Array(tiles).fill(null),i=new Array(tiles).fill(null);for(let d=0;d<tiles;d++)e[d]=rng.random_between(0,1),t[d]=palette[rng.random_int(1,4)],i[d]=rng.random_choice(palette);randomness.push(e),tileColors.push(t),cellColors.push(i),isFlipping.push(rng.random_choice([!0,!1])),offs.push(rng.random_between(0,1)),arc$.push(rng.random_choice([45,60])),arc$2.push(rng.random_choice([PI,PI+QUARTER_PI,2*PI]))}noStroke()}function draw(){background(palette[0]);for(let e=0;e<=tiles;e++){for(let t=0;t<tiles;t++){if(fill(cellColors[e][t]),isRounded&&radius>.03?radius-=.02:radius+=.02,push(),fill(tileColors[e][t]),randomness[e][t]>.9)isFlipping[e]?arc(e*tileWidth-tileWidth/2,t*tileHeight+tileWidth/2,.75*tileWidth,.75*tileHeight,.01*radius+offs[e]+mouseX/200,.01*-radius+offs[e]+mouseX/200):arc(e*tileWidth-tileWidth/2,t*tileHeight+tileWidth/2,.75*tileWidth,.75*tileHeight,arc$[e]+offs[e],arc$2[e]+offs[e]);else if(randomness[e][t]>.6)if(randomness[e][t]>.75)if(mouseIsPressed){push();let i=color(tileColors[e][t]);i.setAlpha(256-sin(psuedoFrame/20)*psuedoFrame*7),fill(i),ellipse(e*tileWidth-tileWidth/2,t*tileHeight+tileHeight/2,tileWidth),pop()}else ellipse(e*tileWidth-tileWidth/2,t*tileHeight+tileHeight/2,tileWidth);else randomness[e][t]>.68?arc(e*tileWidth-tileWidth/2,t*tileHeight+tileWidth/2,.75*tileWidth,.75*tileHeight,0,-PI,CHORD):arc(e*tileWidth-tileWidth/2,t*tileHeight+tileWidth/2,.75*tileWidth,.75*tileHeight,PI,TWO_PI,CHORD);else randomness[e][t]>.3?randomness[e][t]>.5?rect(e*tileWidth-tileWidth,t*tileHeight,tileWidth,tileHeight,radius):rect(e*tileWidth-tileWidth,t*tileHeight,tileWidth,tileHeight):randomness[e][t]>.2?triangle(e*tileWidth-tileWidth,t*tileHeight+tileHeight,e*tileWidth,t*tileHeight+tileHeight,e*tileWidth,t*tileHeight):triangle(e*tileWidth-tileWidth,t*tileHeight+tileHeight,e*tileWidth,t*tileHeight,e*tileWidth-tileWidth,t*tileHeight);pop()}radius<=.1?(isRounded=!1,radius=.1):radius>99&&(isRounded=!0,radius=99)}mouseIsPressed?(stroke(palette[0]),strokeWeight(WIDTH/500+40*sin(psuedoFrame/100)),psuedoFrame++):(noStroke(),strokeWeight(0),psuedoFrame=1)}";
     }
     
+    function showLicense(uint _id) public view returns(string memory) {
+        require(_id < totalSupply(), "wrong id");
+        return ORBITS_LICENSE;
+    }
+
+
     function tokensOfOwner(address _owner) external view returns(uint256[] memory ) {
         uint256 tokenCount = balanceOf(_owner);
         if (tokenCount == 0) {

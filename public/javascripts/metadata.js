@@ -1,3 +1,5 @@
+const chroma = require("./chroma.min.js")
+
 // const genRanHex = size => "0x" + [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
 
 // let randHash = genRanHex(64)

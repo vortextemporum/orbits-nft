@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
-let {contract, baseURI, mc} = require('../utils')
+let {contract, baseURI} = require('../utils')
+// let {contract, baseURI, mc} = require('../utils')
 let thumbnail = require('./lib/thumbnail')
 let getAttributes = require('../public/javascripts/metadata')
 /* GET home page. */
@@ -17,13 +18,13 @@ router.get('/token/:id', async function (req, res, next) {
             res.status(202)
             return
         }
-        const cached = await mc.get(`token_${parseInt(id).toString()}`)
-        console.log(cached)
-        if (cached.value) {
-            res.status(200).json(JSON.parse(cached.value?.toString()))
-            isBusy = false;
-            return
-        }
+        // const cached = await mc.get(`token_${parseInt(id).toString()}`)
+        // console.log(cached)
+        // if (cached.value) {
+        //     res.status(200).json(JSON.parse(cached.value?.toString()))
+        //     isBusy = false;
+        //     return
+        // }
         isBusy = true
         const hash = await contract.tokenHash(id)
         if (!hash) {
@@ -42,8 +43,9 @@ router.get('/token/:id', async function (req, res, next) {
         let metadata$ = {
             image,
             hash,
-            name: `Non Fungible Pot - #${id}`,
-            description: `Generative NFT collection with limited supply and the scripts stored on Ethereum Blockchain. Inspired by on-chain art platform "Art Blocks".`,
+            name: `ørß1t - #${id}`,
+            description: `In 2019, I was heavily influenced by Alexai Shulgin's "Form Art", and one of my first generative visual works using p5.js was, orbiting html radio buttons on browser. The live sketch can be viewed at my website "https://berkozdemir.com/", and SuperRare (as radiOrbit #1 and #2). "ørß1t$” is the updated version, rewritten for on-chain generative art purposes; which displays a unique combination of varying object shapes, color palettes & distribution, orbit directions & speeds for every mint. You can click on canvas and move in x-axis to change the overall spinning speed. Love y’all, xoxo`,
+            license: `YOUR ørß1t$, YOUR CALL. If you own an ørß1t$ NFT, you are fully permitted to do whatever you want with it (including both non-commercial/commercial uses). You can even do paid fortune telling with it lol.  Also, creative derivative works are highly encouraged.`,
             animation_url: `${baseURI}/generator/${id}`,
             token_uri: `${baseURI}/api/token/${id}`,
             attributes: attributes,
@@ -54,16 +56,16 @@ router.get('/token/:id', async function (req, res, next) {
         console.log({metadata$})
 
 
-        // magical thing. heroku has a memory cache add-on. this way we can cache our responses and get a faster working api.
-        await mc.set(`token_${id}`, JSON.stringify(metadata$)
-            , {expires: 1200}, function (err, val) {
-                if (err !== null) {
-                    console.log('Error setting value: ' + err)
-                    res.status(500).json(err)
-                    isBusy = false;
-                    return
-                }
-            })
+        // // magical thing. heroku has a memory cache add-on. this way we can cache our responses and get a faster working api.
+        // await mc.set(`token_${id}`, JSON.stringify(metadata$)
+        //     , {expires: 1200}, function (err, val) {
+        //         if (err !== null) {
+        //             console.log('Error setting value: ' + err)
+        //             res.status(500).json(err)
+        //             isBusy = false;
+        //             return
+        //         }
+        //     })
         res.status(200).json(metadata$)
     } catch (e) {
         console.log(e)
