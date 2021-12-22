@@ -32,7 +32,7 @@ router.get('/token/:id', async function (req, res, next) {
             isBusy = false;
             return
         }
-        let attributes = getAttributes(hash)
+        let [attributes, extraInformation] = getAttributes(hash)
         console.info('Creating Thumbnail')
         let image = await thumbnail(id)
         console.log(image)
@@ -48,11 +48,15 @@ router.get('/token/:id', async function (req, res, next) {
             license: `YOUR ørß1t$, YOUR CALL. If you own an ørß1t$ NFT, you are fully permitted to do whatever you want with it (including both non-commercial/commercial uses). You can even do paid fortune telling with it lol.  Also, creative derivative works are highly encouraged.`,
             animation_url: `${baseURI}/generator/${id}`,
             token_uri: `${baseURI}/api/token/${id}`,
-            attributes: attributes,
             external_url: `${baseURI}/generator/${id}`,
             script_type: "p5js",
             aspect_ratio: "1",
+            attributes: attributes,
         }
+        for (const [key, value] of Object.entries(extraInformation)) {
+            metadata$[key] = value;
+        }
+        
         console.log({metadata$})
 
 

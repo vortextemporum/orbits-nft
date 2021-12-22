@@ -246,8 +246,8 @@ module.exports = function getAttributes(hash) {
     6: "STAR2",
     7: "STAR3",
     8: "STAR4",
-    9: "SEQORBIT - " + nameList.join(", "),
-    10: "SEQOBJ - " + nameList.join(", "),
+    9: "SEQORBIT",
+    10: "SEQOBJ",
     11: "PIE",
     12: "SEXY TRIANGLE",
     13: "HEART",
@@ -402,6 +402,9 @@ module.exports = function getAttributes(hash) {
 
     }
   }
+
+  metadataAttributes["Creation Hash"] = hash
+
   metadataAttributes["Number of Orbits"] = numOrbits.toString()
   metadataAttributes["Coloring"] = colorMeta[colorchoice]
 
@@ -414,20 +417,31 @@ module.exports = function getAttributes(hash) {
 
   metadataAttributes["Circles in Orbits"] = circlesinOrbitsArray.join(",")
   metadataAttributes["Symmetry in Orbits"] = symmetryinOrbitsArray.join(",")
-  metadataAttributes["Object Shapes"] = shapeMeta[whichShapesSelect]
-  metadataAttributes["Color list"] = colorlist.join(",")
+  metadataAttributes["Shape"] = shapeMeta[whichShapesSelect]
+
+  if (whichShapesSelect === 9 || whichShapesSelect === 10) {
+
+    metadataAttributes["Shape Sequence"] = nameList.join(", ")
+  }
+
+  
+
+
+  const features = []
+  let extraInformation = {};
+
   metadataAttributes["Are Objects Rotating"] = (areObjectsRotating) ? "YES" : "NO"
 
   if (whichShapesSelect != 13) {
     if (areObjectsRotating) {
-      metadataAttributes["Object Rotation Direction"] = rotationDirections
+      extraInformation["rotations"] = rotationDirections
     }
   } else {
     metadataAttributes["Are Objects Rotating"] = "NO"
   }
 
+  extraInformation["color-list"] = colorlist.join(",")
 
-  const features = []
 
   for (const [key, value] of Object.entries(metadataAttributes)) {
     features.push({
@@ -438,7 +452,7 @@ module.exports = function getAttributes(hash) {
 
   //   const features = JSON.stringify(metadataAttributes)
 
-  return features
+  return [features, extraInformation]
 }
 
 

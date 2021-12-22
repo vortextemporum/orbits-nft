@@ -36,7 +36,7 @@ module.exports = async (tokenId) => {
         // this way it stores browser object in higher scope. making it accessible and preventing creating new browser for each run.
         if (!browser) {
             browser = await puppeteer.launch({
-                defaultViewport: {width: 500, height: 500},
+                defaultViewport: {width: 1000, height: 1000},
                 headless: true,
                 args: ['--no-sandbox'],
             });
@@ -47,8 +47,8 @@ module.exports = async (tokenId) => {
         await page.waitForTimeout(600) // waiting script to generate pot first.
         let ss = await page.screenshot({// Screenshot the website using defined options
             fullPage: true,
-            type: "jpeg",
-            quality: 80
+            type: "png"
+            // quality: 100
         });
         await page.close();                           // Close the website so app won't get crashed due to memory overload
         return await uploadFile(ss)
