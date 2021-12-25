@@ -60,16 +60,16 @@ router.get('/token/:id', async function (req, res, next) {
         console.log({metadata$})
 
 
-        // // magical thing. heroku has a memory cache add-on. this way we can cache our responses and get a faster working api.
-        // await mc.set(`token_${id}`, JSON.stringify(metadata$)
-        //     , {expires: 1200}, function (err, val) {
-        //         if (err !== null) {
-        //             console.log('Error setting value: ' + err)
-        //             res.status(500).json(err)
-        //             isBusy = false;
-        //             return
-        //         }
-        //     })
+        // magical thing. heroku has a memory cache add-on. this way we can cache our responses and get a faster working api.
+        await mc.set(`token_${id}`, JSON.stringify(metadata$)
+            , {expires: 1200}, function (err, val) {
+                if (err !== null) {
+                    console.log('Error setting value: ' + err)
+                    res.status(500).json(err)
+                    isBusy = false;
+                    return
+                }
+            })
         res.status(200).json(metadata$)
     } catch (e) {
         console.log(e)

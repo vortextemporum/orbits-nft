@@ -1906,31 +1906,23 @@ library SafeMath {
     }
 }
 
-
-
-
-
-
 // THIS CONTRACT IS A FORK OF REDEMPTION BY MEMORYC0LLLECTOR - https://redemptionnft.art/
 
-
-
-
 pragma solidity ^0.8.0;
-
 
 // SPDX-License-Identifier: UNLICENSED
 
 interface IAMABASTARD {
-    function balanceOf(address _address) external view returns (uint256) {}
+    function balanceOf(address _address) external view returns (uint256);
 }
 
 contract Orbits is ERC721, Ownable {
+
     using SafeMath for uint256;
     using Strings for uint256;
 
     uint public constant MAX_TOKENS = 1024;
-    uint public constant MAX_SALES = 814;
+    uint public constant MAX_SALES = 810;
     uint public constant MAX_FREE_MINT = 200;
 
     uint public SALE_COUNT;
@@ -1943,20 +1935,20 @@ contract Orbits is ERC721, Ownable {
 
     mapping(uint => string) public GENERATOR_SCRIPT_CODE;
 
-    string public METADATA_PROVENANCE_HASH = "";
     string public GENERATOR_ADDRESS;
     string public IPFS_GENERATOR_ADDRESS;
 
-    string public constant ORBITS_LICENSE = "YOUR ørß1t$, YOUR CALL. If you own an ørß1t$ NFT, you are fully permitted to do whatever you want with it (including both non-commercial/commercial uses). You can even do paid fortune telling with it lol.  Also, creative derivative works are highly encouraged.";
-
+    string public constant ORBITS_LICENSE = "YOUR orbit, YOUR CALL. If you own an NFT from this collection, you are fully permitted to do whatever you want with it (including both non-commercial/commercial uses). You can even do paid fortune telling with it lol.  Also, creative derivative works are highly encouraged.";
 
     uint public constant PRICE = 77700000000000000;
 
     mapping (address => bool) public didWalletFreeClaim;
 
-    address private BASTARDDAO = 0x15D0F64FFCf91c39810529F805Cc3595Dc3EF83f;
-    address private BGANPUNKSV2ADDRESS = 0x31385d3520bCED94f77AaE104b406994D8F2168C;
+    // address private BGANPUNKSV2ADDRESS = 0x31385d3520bCED94f77AaE104b406994D8F2168C;
+    address private BGANPUNKSV2ADDRESS = 0xC0fE8412b1eBA8eeeF2FEc5c656ac2a6b4f25069;
 
+    address private MEMORYCOLLECTOR = 0xEbbCF9D8576376765dba9d883145cEeeE243ad44;
+    address private BASTARDDAO = 0x15D0F64FFCf91c39810529F805Cc3595Dc3EF83f;
 
     constructor() ERC721("ORBITS","ORBIT")  {
 
@@ -1965,27 +1957,29 @@ contract Orbits is ERC721, Ownable {
         GENERATOR_SCRIPT_CODE[2] = ""; // ørß1t$ sketch code
         GENERATOR_SCRIPT_CODE[3] = ""; // metadata code
 
-        // setBaseURI("https://orbits.wtf/api/token/");
+        setBaseURI("https://orbitsnft.herokuapp.com/api/token/");
 
         _safeMint(msg.sender, 0); // I DESERVE THE #0
-        _safeMint(msg.sender, 1); // TO MEMORYCOLLECTOR FOR HELPING WITH CODE
-        _safeMint(BASTARDDAO, 2); // TO BASTARDDAO
-        _safeMint(BASTARDDAO, 3); // TO BASTARDDAO
+        _safeMint(MEMORYCOLLECTOR, 1); // TO MEMORYCOLLECTOR FOR HELPING
+        _safeMint(msg.sender, 2); // I DESERVE THE #2
+        _safeMint(MEMORYCOLLECTOR, 3); // TO MEMORYCOLLECTOR FOR HELPING
         _safeMint(BASTARDDAO, 4); // TO BASTARDDAO
         _safeMint(BASTARDDAO, 5); // TO BASTARDDAO
         _safeMint(BASTARDDAO, 6); // TO BASTARDDAO
         _safeMint(BASTARDDAO, 7); // TO BASTARDDAO
         _safeMint(BASTARDDAO, 8); // TO BASTARDDAO
         _safeMint(BASTARDDAO, 9); // TO BASTARDDAO
+        _safeMint(BASTARDDAO, 10); // TO BASTARDDAO
+        _safeMint(BASTARDDAO, 11); // TO BASTARDDAO
 
         creationDates[0] = block.number;
         creators[0] = msg.sender;
         creationDates[1] = block.number;
-        creators[0] = msg.sender;
+        creators[1] = MEMORYCOLLECTOR;
         creationDates[2] = block.number;
-        creators[2] = BASTARDDAO;
+        creators[2] = msg.sender;
         creationDates[3] = block.number;
-        creators[3] = BASTARDDAO;
+        creators[3] = MEMORYCOLLECTOR;
         creationDates[4] = block.number;
         creators[4] = BASTARDDAO;
         creationDates[5] = block.number;
@@ -2023,13 +2017,13 @@ contract Orbits is ERC721, Ownable {
     }
 
     function modifyScript(uint _index, string memory _code) public onlyOwner {
-        GENERATOR_SOURCE[_index] = _code;
+        GENERATOR_SCRIPT_CODE[_index] = _code;
     }
 
     function freeOrbitForBastard() public {
         require(FREE_MINT_COUNT < MAX_FREE_MINT, "Sale has already ended");
         require(IAMABASTARD(BGANPUNKSV2ADDRESS).balanceOf(msg.sender) > 0, "Wallet has no bastards!");
-        require(!didWalletFreeClaim[msg.sender], "Wallet already used for free mint");
+        require(didWalletFreeClaim[msg.sender] == false, "Wallet already used for free mint");
         uint mintIndex = totalSupply();
         _safeMint(msg.sender, mintIndex);
         creationDates[mintIndex] = block.number;
@@ -2049,11 +2043,7 @@ contract Orbits is ERC721, Ownable {
     }
     
     // ONLYOWNER FUNCTIONS
-    
-    function setProvenanceHash(string memory _hash) public onlyOwner {
-        METADATA_PROVENANCE_HASH = _hash;
-    }
-    
+        
     function setGeneratorIPFSHash(string memory _hash) public onlyOwner {
         IPFS_GENERATOR_ADDRESS = _hash;
     }

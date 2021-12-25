@@ -25,6 +25,7 @@ time, mark, audio, video {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    background-color: blue;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -62,10 +63,6 @@ body {
 }
 
 
-a {
-    color: white !important;
-}
-
 a:hover {
     color: deepskyblue !important;
     text-decoration: underline !important;
@@ -96,6 +93,7 @@ body#generator {
 
 .sale-main {
     min-height: 100vh;
+    min-width: 100vw;
 }
 
 .stairway-main h1 {

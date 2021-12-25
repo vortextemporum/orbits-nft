@@ -1,4 +1,4 @@
-let tokenData = { "hash": "0x311212f7717479a0afde9357db37dbb6de85321e6529900b191d7dda3ad89e8e" };
+let tokenData = { "hash": "0x3fd6ccf4568a8a22a3c6c913ff92d6cb1d19eabac83ed16652bc4ccce4d9647d" };
 
 // var DEFAULT_SIZE = 1000
 // REMOVE HERE IN PRODUCTION
@@ -43,7 +43,8 @@ function setup() {
   } else {
       SIZE = window.innerWidth
   }
-  createCanvas(SIZE, SIZE);
+  let renderer = createCanvas(window.innerWidth, window.innerHeight);
+  renderer.canvas.classList.add("stairwayRenderer")
   // frameRate(30)
   // createLoop({duration:6, gif:true})
   

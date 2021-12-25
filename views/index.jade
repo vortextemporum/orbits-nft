@@ -1,36 +1,93 @@
 extends layout
 
 block content
-    div.container.sale-main.d-flex.align-items-center.justify-content-center.flex-column
-        div.row
-            div.col-12.col-lg-6.d-flex.align-items-center.justify-content-center
-                div.stairway-main.d-flex.align-items-center.justify-content-center.flex-column
-                    h1.text-white.text-center ChainPots
-                    p.text-white.text-center Created with the "Generative NFT collection infrastructure" built by <a href="https://twitter.com/memorycollect0r">memorycollect0r</a> with limited supply and the scripts stored on Ethereum Blockchain. Inspired by on-chain art platform "Art Blocks".
-                    p made using Express.js & Jade & Web3
-                    div.d-flex.flex-column.align-items-center.justify-content-center
-                        div.loader
-                            div.lds-facebook
-                                div
-                                div
-                                div
-                                div
-                        p.text-white.font-weight-bold
-                        //p.text-white#current-supply
-                        a(href="https://opensea.io/collection/chainpots").text-white MINTING PERIOD HAS ENDED. PLEASE VISIT THE OPENSEA.
-                        button(disabled = true)#mintButton.mt-4.btn.custom.text-white MINT
-            div.col-12.col-lg-6.d-flex.align-items-center.justify-content-center
-                iframe#showcase(src="/generator/0", style={width: "400px", height: "400px"})
-        div.row.mt-5.pt-5
-            div.col-12.pt-5
-                a(href="https://opensea.io/collection/chainpots").d-flex.align-items-center.justify-content-center.flex-column.font-weight-bold.text-uppercase View on
-                    img(src="https://opensea.io/static/images/logos/opensea.svg", width=40).mt-2
-        div.row.mt-5
-            div.col-12
-                div.text-center.font-weight-bold
-                    a(href="https://github.com/canersevince/ChainPots/tree/main") Github
-                    br
-                    a(href="https://openprocessing.org/sketch/940273") P5 Sketch derivated from the original script
+    div
+        //- div.row
+        div.w-96.flex.items-center.justify-center.flex-col.mt-5.mx-auto
+            div.text-white
+                p.text-4xl.font-bold.text-center ------ ørß1t$ NFTs ------
+                div.my-8
+                    p.text-xl.font-bold.text-center a humble generative art nft project no one asked for
+                    p.text-lg.font-bold.text-center.my-2 delivered by yours truly 
+                        span.text-xl.font-bold.text-center.text-pink-500 berk aka princesscamel
+                    p.text-lg.font-bold.text-center.mt-4  using p5.js, and a 
+                        a(href="https://github.com/canersevince/ChainPots").text-red-500 generative NFT collection infrastructure 
+                        span built by 
+                        a(href="https://twitter.com/memorycollect0r").text-red-500 memorycollect0r
+
+                div.flex.items-center.justify-center.flex-col
+                    iframe#showcase(src="/generator/0", style={width: "600px", height: "600px"})
+                    p.text-white ørß1t #0
+                p.text-center.my-6 ------------------------
+                p.text-xl.mt-4.text-pink-100 In 2019, I was heavily influenced by Alexai Shulgin's "Form Art", and one of my first generative visual works using p5.js was making orbiting html radio buttons on browser. The live sketch can be viewed at my website "https://berkozdemir.com/", and SuperRare (as radiOrbit #1 and #2). "ørß1t$” is the updated version, rewritten for on-chain generative art purposes; which displays a unique combination of varying object shapes, color palettes & distribution, orbit directions & speeds for every mint. You can click on canvas and move in x-axis to change the overall spinning speed.
+                p.text-center.my-6 ------------------------
+
+                p.text-lg.mt-4.text-pink-200 I had been in contact with 
+                    a(href="https://EthBlock.art").text-red-500 EthBlock.art 
+                    span && 
+                    a(href="https://artblocks.io").text-red-500 ArtBlocks 
+                    span to release this work, but later I realized that if I can DIY I don't have to release my stuff on such platforms. I wanna thank 
+                    a(href="https://twitter.com/memorycollect0r").text-red-500.font-bold MemoryCollector 
+                    span for sharing his 
+                    a(href="https://twitter.com/memorycollect0r").text-red-500.font-bold open source generative art infrastructure 
+                    span so I am able to release this project independently.
+                p.text-2xl.mt-4.text-yellow-300 HOW DOES IT WORK?
+                p.text-lg.mt-4.text-yellow-300 It is pretty like ArtBlocks structure. You mint a token and a unique hash is generated from your transaction. Then it is used as a seed for the generative art script. The generative art script is deterministic so a generated hash always outputs the same shit. Backend server takes a screenshot from the output, pins the png to IPFS and points it in the token metadata (to be easily viewable on marketplaces).
+                p.text-2xl.mt-4.text-red-400 LICENSING
+                p.text-lg.mt-4.text-red-400 ørß1t$ NFTs comes with DO WHAT THE FUCK YOU WANT WITH IT license. I don't give a shit on how you would use or utilize your NFT. You can even do fortune telling lol
+                p.text-2xl.mt-4.text-green-300 DISTRIBUTION AND PRIMARY SALE
+                p.text-lg.mt-4.text-green-300 - There are 1024 ørß1t$ in total. 
+                p.text-lg.mt-2.text-green-300 - 814 ørß1t$ are going to be sold for 0.0777 ETH
+                p.text-lg.mt-2.text-green-300 - 200 ørß1t$ are going to be freely mintable (+ gas) by Bastard Gan Punks V2 holders (1 per wallet).
+                p.text-lg.mt-2.text-green-300 - First 10 ørß1t$ are given to me, memoryc0llector and BASTARD DAO upon smart contract deployment.
+                p.text-2xl.mt-4.text-purple-500.font-bold THERE WILL BE NO SECONDARY SALE ROYALTIES
+                
+                p.text-2xl.mt-4.text-pink-200.font-bold WHAT NEXT???
+                p.text-lg.mt-4.text-pink-200 Since I was able to implement my p5 sketch within this infrastructure, now I am able to think about giving new utility and derivatives to 
+                    a(href="https://glicpixxx.love/ver002").text-red-500 GLICPIXXXVER002 NFTs.  
+                    span It will take some time but I have cool plans. Stay tuneeeed
+                p.text-lg.mt-4.text-pink-200 Ah, also some maybe audiovisual stuff.
+                p.text-2xl.mt-4.font-bold WHOAMI?
+                p.text-lg.mt-4.text-pink-200 I am Berk Özdemir, aka Princess Camel, an electronic music composer, multidisliplinary artist, creative script kiddie and maker of random stuff. I believe in the power of remixing, sharing creative tools, mashing media, recontextualizing existing artifacts, web5, p2p, ai. 
+                p.text-lg.mt-4.text-pink-200.text-center.font-bold
+                    a(href="https://linktr.ee/0xberk").text-red-500 linktree (website, some projects etc)
+                    span  / 
+                    a(href="https://www.twitter.com/berkozdemir").text-red-500 twitter 
+                p.text-lg.mt-4.text-pink-200.text-center.font-bold 
+                p.text-lg.mt-4.text-pink-200.text-center.font-bold
+                    span PRINCESS CAMEL music - 
+                    a(href="https://open.spotify.com/artist/6yf9s1or7JbsJJ3dOJ6tjf?si=GbBCtkX4QX-FrKSV4mm1pg").text-red-500 spotify 
+                    span  / 
+                    a(href="https://www.soundcloud.com/berk-aka-princesscamel").text-red-500 soundcloud 
+                    span  / 
+                    a(href="https://www.audius.co/princesscamel").text-red-500 audius 
+
+                p.text-2xl.mt-6.font-bold MINT ørß1t
+                
+                //- div.d-flex.flex-column.align-items-center.justify-content-center
+                    //- div.loader
+                    //-     div.lds-facebook
+                    //-         div
+                    //-         div
+                    //-         div
+                    //-         div
+                    //- p.text-white.font-weight-bold
+                p.text-2xl.text-white#current-supply
+                p.text-2xl.text-white#sale-count
+                p.text-2xl.text-white#claim-count
+                //- a(href="https://opensea.io/collection/chainpots").text-white MINTING PERIOD HAS ENDED. PLEASE VISIT THE OPENSEA.
+                button(disabled = false)#mintButton.mt-4.btn.custom.text-white MINT AN ørß1t FOR 0.0777 ETH
+                button(disabled = false)#claimButton.mt-4.btn.custom.text-white MINT AN ørß1t FOR FREE (FOR BGANPUNKSV2 HOLDERS)
+        
+                div.row.mt-5.pt-5
+                    div.col-12.pt-5
+                        a(href="https://opensea.io/collection/chainpots").flex.items-center.justify-center.flex-col.font-bold.uppercase View on
+                            img(src="https://opensea.io/static/images/logos/opensea.svg", width=40).mt-2
+                div.row.my-6
+                    div.text-xl.text-center.font-bold
+                        a(href="https://github.com/vortextemporum/orbits-nft/") Github Source Code (for from ChainPots)
+                            //- br
+                            //- a(href="https://openprocessing.org/sketch/940273") P5 Sketch derivated from the original script
 
 
 
