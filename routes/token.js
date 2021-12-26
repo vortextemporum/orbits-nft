@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
-let {contract, baseURI} = require('../utils')
-// let {contract, baseURI, mc} = require('../utils')
+// let {contract, baseURI} = require('../utils')
+let {contract, baseURI, mc} = require('../utils')
 let thumbnail = require('./lib/thumbnail')
 let getAttributes = require('../public/javascripts/metadata')
 /* GET home page. */
