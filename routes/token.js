@@ -18,13 +18,13 @@ router.get('/token/:id', async function (req, res, next) {
             res.status(202)
             return
         }
-        // const cached = await mc.get(`token_${parseInt(id).toString()}`)
-        // console.log(cached)
-        // if (cached.value) {
-        //     res.status(200).json(JSON.parse(cached.value?.toString()))
-        //     isBusy = false;
-        //     return
-        // }
+        const cached = await mc.get(`token_${parseInt(id).toString()}`)
+        console.log(cached)
+        if (cached.value) {
+            res.status(200).json(JSON.parse(cached.value?.toString()))
+            isBusy = false;
+            return
+        }
         isBusy = true
         const hash = await contract.tokenHash(id)
         if (!hash) {
