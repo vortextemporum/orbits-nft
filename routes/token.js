@@ -6,12 +6,17 @@ let thumbnail = require('./lib/thumbnail')
 let getAttributes = require('../public/javascripts/metadata')
 /* GET home page. */
 let isBusy;
-
+// let hash;
 router.get('/token/:id', async function (req, res, next) {
     try {
         let id = req.params.id
+        // const supply = await contract.totalSupply()
+        // console.log(id)
+        // console.log(parseInt(supply))
+        // console.log(parseInt(id) >= parseInt(supply))
+        // if (id === null || typeof id == "undefined" || parseInt(id) >= parseInt(supply)) {
         if (id === null || typeof id == "undefined") {
-            res.status(404)
+            res.status(404).json({error: "error"})
             return
         }
         if (isBusy) {
@@ -26,12 +31,24 @@ router.get('/token/:id', async function (req, res, next) {
             return
         }
         isBusy = true
-        const hash = await contract.tokenHash(id)
-        if (!hash) {
-            res.status(404)
+        let hash;
+        try {
+            hash = await contract.tokenHash(id)
+        }
+        catch(err) {
+            res.status(404).json({error: "error"})
             isBusy = false;
             return
         }
+        // const hash = await contract.tokenHash(id)
+
+        // console.log(hash)
+        // console.log(typeof(hash))
+        // if (!hash) {
+        //     res.status(404).json({error: "error"})
+        //     isBusy = false;
+        //     return
+        // }
         let [attributes, extraInformation] = getAttributes(hash)
         console.info('Creating Thumbnail')
         let image = await thumbnail(id)
@@ -53,9 +70,9 @@ router.get('/token/:id', async function (req, res, next) {
             aspect_ratio: "1",
             attributes: attributes,
         }
-        for (const [key, value] of Object.entries(extraInformation)) {
-            metadata$[key] = value;
-        }
+        // for (const [key, value] of Object.entries(extraInformation)) {
+        //     metadata$[key] = value;
+        // }
         
         console.log({metadata$})
 
@@ -69,7 +86,7 @@ router.get('/token/:id', async function (req, res, next) {
                     isBusy = false;
                     return
                 }
-            })
+        })
         res.status(200).json(metadata$)
     } catch (e) {
         console.log(e)

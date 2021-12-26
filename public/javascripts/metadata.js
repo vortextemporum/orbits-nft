@@ -434,13 +434,15 @@ module.exports = function getAttributes(hash) {
 
   if (whichShapesSelect != 13) {
     if (areObjectsRotating) {
-      extraInformation["rotations"] = rotationDirections
+      metadataAttributes["rotations"] = rotationDirections.join(",")
+      // extraInformation["rotations"] = rotationDirections.join(",")
     }
   } else {
     metadataAttributes["Are Objects Rotating"] = "NO"
   }
 
-  extraInformation["color-list"] = colorlist.join(",")
+  metadataAttributes["color-list"] = colorlist.join(",")
+  // extraInformation["color-list"] = colorlist.join(",")
 
 
   for (const [key, value] of Object.entries(metadataAttributes)) {
