@@ -3,7 +3,7 @@
 // ørß1t$
 // generative art nft project by berk aka princesscamel
 // @berkozdemir - berkozdemir.com
-// forked from RedemptionNFT.art by @memoryc0llector - 0x399AA4e3A65282eEe090EB58aedD787431C4aF2D
+// forked from RedemptionNFT.art by @memorycollect0r - 0x399AA4e3A65282eEe090EB58aedD787431C4aF2D
 
 // In 2019, I was heavily influenced by Alexai Shulgin's "Form Art", and one of my first generative visual works using p5.js was making orbiting html radio buttons on browser. 
 // The live sketch can be viewed at my website "https://berkozdemir.com/", and SuperRare (as radiOrbit #1 and #2). 
@@ -2074,7 +2074,7 @@ contract Orbits is ERC721, Ownable {
     // address private BGANPUNKSV2ADDRESS = 0x31385d3520bCED94f77AaE104b406994D8F2168C;
     address private BGANPUNKSV2ADDRESS = 0xC0fE8412b1eBA8eeeF2FEc5c656ac2a6b4f25069; // TEST
 
-    address private treasuryAddress;
+    // address private treasuryAddress;
     address private BERK = 0xc5E08104c19DAfd00Fe40737490Da9552Db5bfE5;
     address private MEMORYCOLLECTOR = 0xEbbCF9D8576376765dba9d883145cEeeE243ad44;
     address private BASTARDDAO = 0x15D0F64FFCf91c39810529F805Cc3595Dc3EF83f;
@@ -2090,7 +2090,7 @@ contract Orbits is ERC721, Ownable {
         setBaseURI("https://orbitsnft.herokuapp.com/api/token/");
         setGeneratorAddress("https://orbitsnft.herokuapp.com/generator/");
 
-        setTreasuryAddress(0x63deC16cB2994fA474164066bc8EF606FDc3B9E9);
+        // setTreasuryAddress(0x63deC16cB2994fA474164066bc8EF606FDc3B9E9);
 
         _safeMint(BERK, 0); // I DESERVE THE #0
         creationDates[0] = block.number;
@@ -2150,6 +2150,16 @@ contract Orbits is ERC721, Ownable {
         }
     }
 
+    function tokenHash(uint256 tokenId) public view returns(bytes32){
+        require(_exists(tokenId), "DOES NOT EXIST");
+        return bytes32(keccak256(abi.encodePacked(address(this), creationDates[tokenId], creators[tokenId], tokenId)));
+    }
+    
+    function generatorAddress(uint256 tokenId) public view returns (string memory) {
+        require(_exists(tokenId), "DOES NOT EXIST");
+        return string(abi.encodePacked(GENERATOR_ADDRESS, tokenId.toString()));
+    }
+
     function freeOrbitForBastard() public {
         require(hasSaleStarted == true, "Minting isn't open");
         require(FREE_MINT_COUNT < MAX_FREE_MINT, "Sale has already ended");
@@ -2170,7 +2180,7 @@ contract Orbits is ERC721, Ownable {
         uint mintIndex = totalSupply();
         require(mintIndex < MAX_TOKENS, "No more orbit left to mint");
         require(msg.value >= PRICE, "Ether value sent is below the price");
-        require(payable(treasuryAddress).send(msg.value));
+        // require(payable(treasuryAddress).send(msg.value));
         _safeMint(msg.sender, mintIndex);
         creationDates[mintIndex] = block.number;
         creators[mintIndex] = msg.sender;
@@ -2183,7 +2193,8 @@ contract Orbits is ERC721, Ownable {
         uint mintIndex = totalSupply();
         require(mintIndex < MAX_TOKENS, "No more orbit left to mint");
         require(SOSTOKEN.allowance(msg.sender, address(this)) >= SOS_PRICE,"Insuficient Allowance");
-        require(SOSTOKEN.transferFrom(msg.sender,treasuryAddress,SOS_PRICE),"transfer Failed");
+        // require(SOSTOKEN.transferFrom(msg.sender,treasuryAddress,SOS_PRICE),"transfer Failed");
+        require(SOSTOKEN.transferFrom(msg.sender,address(this),SOS_PRICE),"transfer Failed");
         _safeMint(msg.sender, mintIndex);
         creationDates[mintIndex] = block.number;
         creators[mintIndex] = msg.sender;
@@ -2211,22 +2222,11 @@ contract Orbits is ERC721, Ownable {
     function pauseMint() public onlyOwner {
         hasSaleStarted = false;
     }
-    function setTreasuryAddress(address _address) public onlyOwner {
-        treasuryAddress = _address;
+
+    function withdrawAll() public payable onlyOwner {
+        require(payable(msg.sender).send(address(this).balance));
+        require(SOSTOKEN.transfer(msg.sender, SOSTOKEN.balanceOf(address(this))));
     }
     
-    // function withdrawAll() public payable onlyOwner {
-    //     require(payable(msg.sender).send(address(this).balance));
-    // }
-    
-    function tokenHash(uint256 tokenId) public view returns(bytes32){
-        require(_exists(tokenId), "DOES NOT EXIST");
-        return bytes32(keccak256(abi.encodePacked(address(this), creationDates[tokenId], creators[tokenId], tokenId)));
-    }
-    
-    function generatorAddress(uint256 tokenId) public view returns (string memory) {
-        require(_exists(tokenId), "DOES NOT EXIST");
-        return string(abi.encodePacked(GENERATOR_ADDRESS, tokenId.toString()));
-    }
     
 }

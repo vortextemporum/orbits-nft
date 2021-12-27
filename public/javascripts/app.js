@@ -6,7 +6,7 @@ let providerRw;
 let contract;
 let contractRW;
 let signer;
-let contractAddress = "0x049dd35A9fdFa4d11fbc0EdFb9503cE4F432ec10";
+let contractAddress = "0xADA3Dc9F454FBfC7e248F2988c38974b8FF96833";
 let SOSAddress = "0x4d73E2dc80a985a19bbc160ff1Bd2b7DeA65c880";
 // let SOSAddress = "0x3b484b82567a09e2588A13D54D032153f0c0aEe0";
 let baseURI = "https://orbitsnft.herokuapp.com/";

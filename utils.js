@@ -5,7 +5,7 @@ var memjs = require('memjs')
 const settings = {
     baseURI: "https://orbitsnft.herokuapp.com",
     // contractAddress: "0x03Ce4a39Dd1146d052934836f73E2d7f82ab5Bba",
-    contractAddress: "0x049dd35A9fdFa4d11fbc0EdFb9503cE4F432ec10",
+    contractAddress: "0xADA3Dc9F454FBfC7e248F2988c38974b8FF96833",
     // infuraAPI: "https://mainnet.infura.io/v3/880a855aaa9d4e57b5a5e34e028f4fdf"
     infuraAPI: "https://rinkeby.infura.io/v3/880a855aaa9d4e57b5a5e34e028f4fdf"
 }
