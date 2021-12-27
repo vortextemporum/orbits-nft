@@ -447,7 +447,7 @@ module.exports = function getAttributes(hash) {
 
   for (const [key, value] of Object.entries(metadataAttributes)) {
     features.push({
-      "trait_name": key,
+      "trait_type": key,
       "value": value
     })
   }

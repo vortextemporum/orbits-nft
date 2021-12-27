@@ -3,7 +3,7 @@
 // ørß1t$
 // generative art nft project by berk aka princesscamel
 // @berkozdemir - berkozdemir.com
-// forked from RedemptionNFT.art by @memorycollect0r - 0x399AA4e3A65282eEe090EB58aedD787431C4aF2D
+// forked from RedemptionNFT.art by @memoryc0llector - 0x399AA4e3A65282eEe090EB58aedD787431C4aF2D
 
 // In 2019, I was heavily influenced by Alexai Shulgin's "Form Art", and one of my first generative visual works using p5.js was making orbiting html radio buttons on browser. 
 // The live sketch can be viewed at my website "https://berkozdemir.com/", and SuperRare (as radiOrbit #1 and #2). 
@@ -2064,15 +2064,13 @@ contract Orbits is ERC721, Ownable {
 
     string public constant ORBITS_LICENSE = "YOUR orbit, YOUR CALL. If you own an NFT from this collection, you are fully permitted to do whatever you want with it (including both non-commercial/commercial uses). You can even do paid fortune telling with it lol. Also, creative derivative works are highly encouraged.";
 
-    uint public constant PRICE = 77700000000000000;
-    uint public constant SOS_PRICE = 42069420694206942069420690;
-    address public constant SOSTOKENADDRESS = 0x4d73E2dc80a985a19bbc160ff1Bd2b7DeA65c880; // TEST
-    // address public constant SOSTOKENADDRESS = 0xd9145CCE52D386f254917e481eB44e9943F39138;
+    uint public constant PRICE = 77700000000000000; // 0.0777 ETH
+    uint public constant SOS_PRICE = 42069420694206942069420690; // 42069420.694206942069420690 SOS
 
     mapping (address => bool) public didWalletFreeClaim;
 
-    // address private BGANPUNKSV2ADDRESS = 0x31385d3520bCED94f77AaE104b406994D8F2168C;
-    address private BGANPUNKSV2ADDRESS = 0xC0fE8412b1eBA8eeeF2FEc5c656ac2a6b4f25069; // TEST
+    address public constant SOSTOKENADDRESS = 0xd9145CCE52D386f254917e481eB44e9943F39138;
+    address private BGANPUNKSV2ADDRESS = 0x31385d3520bCED94f77AaE104b406994D8F2168C;
 
     // address private treasuryAddress;
     address private BERK = 0xc5E08104c19DAfd00Fe40737490Da9552Db5bfE5;
@@ -2087,10 +2085,8 @@ contract Orbits is ERC721, Ownable {
         GENERATOR_SCRIPT_CODE[1] = "https://berk.mypinata.cloud/ipfs/QmYeLy8QMqq4Zp4A2zBBtgGT23574G8cDCtpu51TL7XCMB"; // slightly edited chroma.min.js
         GENERATOR_SCRIPT_CODE[2] = "https://berk.mypinata.cloud/ipfs/QmYxCmfpfu8zqvr1CKcG29pAGGLutTi4Nxju4RaX7Rnc3f"; // ørß1t$ sketch code
 
-        setBaseURI("https://orbitsnft.herokuapp.com/api/token/");
-        setGeneratorAddress("https://orbitsnft.herokuapp.com/generator/");
-
-        // setTreasuryAddress(0x63deC16cB2994fA474164066bc8EF606FDc3B9E9);
+        setBaseURI("https://orbitsnft.art/api/token/");
+        setGeneratorAddress("https://orbitsnft.art/generator/");
 
         _safeMint(BERK, 0); // I DESERVE THE #0
         creationDates[0] = block.number;
