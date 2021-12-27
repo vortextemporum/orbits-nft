@@ -1,7 +1,14 @@
+// SPDX-License-Identifier: UNLICENSED
+
 // ørß1t$
 // generative art nft project by berk aka princesscamel
 // @berkozdemir - berkozdemir.com
-// forked from RedemptionNFT.art by MEMORYC0LLLECTOR - 0x399AA4e3A65282eEe090EB58aedD787431C4aF2D
+// forked from RedemptionNFT.art by @memoryc0llector - 0x399AA4e3A65282eEe090EB58aedD787431C4aF2D
+
+// In 2019, I was heavily influenced by Alexai Shulgin's "Form Art", and one of my first generative visual works using p5.js was making orbiting html radio buttons on browser. 
+// The live sketch can be viewed at my website "https://berkozdemir.com/", and SuperRare (as radiOrbit #1 and #2). 
+// "ørß1t$” is the updated version, rewritten for on-chain generative art purposes; which displays a unique combination of varying object shapes, color palettes & distribution, orbit directions & speeds for every mint.
+// You can click on canvas and move in x-axis to change the overall spinning speed.
 
 //                                .`           :/`                                 
 //                               `hy.          os-                                 
@@ -2030,8 +2037,6 @@ library SafeMath {
 
 pragma solidity ^0.8.0;
 
-// SPDX-License-Identifier: UNLICENSED
-
 interface IAMABASTARD {
     function balanceOf(address _address) external view returns (uint256);
 }
@@ -2042,7 +2047,7 @@ contract Orbits is ERC721, Ownable {
     using Strings for uint256;
 
     uint public constant MAX_TOKENS = 1024;
-    uint public constant MAX_SALES = 810;
+    uint public constant MAX_SALES = 815;
     uint public constant MAX_FREE_MINT = 200;
 
     uint public SALE_COUNT;
@@ -2056,70 +2061,79 @@ contract Orbits is ERC721, Ownable {
     mapping(uint => string) public GENERATOR_SCRIPT_CODE;
 
     string public GENERATOR_ADDRESS;
-    string public IPFS_GENERATOR_ADDRESS;
 
-    string public constant ORBITS_LICENSE = "YOUR orbit, YOUR CALL. If you own an NFT from this collection, you are fully permitted to do whatever you want with it (including both non-commercial/commercial uses). You can even do paid fortune telling with it lol.  Also, creative derivative works are highly encouraged.";
+    string public constant ORBITS_LICENSE = "YOUR orbit, YOUR CALL. If you own an NFT from this collection, you are fully permitted to do whatever you want with it (including both non-commercial/commercial uses). You can even do paid fortune telling with it lol. Also, creative derivative works are highly encouraged.";
 
     uint public constant PRICE = 77700000000000000;
+    uint public constant SOS_PRICE = 42069420694206942069420690;
+    address public constant SOSTOKENADDRESS = 0x4d73E2dc80a985a19bbc160ff1Bd2b7DeA65c880; // TEST
+    // address public constant SOSTOKENADDRESS = 0xd9145CCE52D386f254917e481eB44e9943F39138;
 
     mapping (address => bool) public didWalletFreeClaim;
 
     // address private BGANPUNKSV2ADDRESS = 0x31385d3520bCED94f77AaE104b406994D8F2168C;
-    address private BGANPUNKSV2ADDRESS = 0xC0fE8412b1eBA8eeeF2FEc5c656ac2a6b4f25069;
+    address private BGANPUNKSV2ADDRESS = 0xC0fE8412b1eBA8eeeF2FEc5c656ac2a6b4f25069; // TEST
 
+    address private treasuryAddress;
+    address private BERK = 0xc5E08104c19DAfd00Fe40737490Da9552Db5bfE5;
     address private MEMORYCOLLECTOR = 0xEbbCF9D8576376765dba9d883145cEeeE243ad44;
     address private BASTARDDAO = 0x15D0F64FFCf91c39810529F805Cc3595Dc3EF83f;
 
-    constructor() ERC721("ORBITS","ORBIT")  {
+    IERC20 SOSTOKEN = IERC20(SOSTOKENADDRESS);
 
-        GENERATOR_SCRIPT_CODE[0] = ""; // p5.min.js
-        GENERATOR_SCRIPT_CODE[1] = ""; // chroma.min.js
-        GENERATOR_SCRIPT_CODE[2] = ""; // ørß1t$ sketch code
-        GENERATOR_SCRIPT_CODE[3] = ""; // metadata code
+    constructor() ERC721("ORBITSNFT","ORBITS")  {
+
+        GENERATOR_SCRIPT_CODE[0] = "https://berk.mypinata.cloud/ipfs/QmTCfmKEeLsLSVAnmhUa1H96A5brNr1RQx8QAfiCbAMRMs"; // p5.min.js
+        GENERATOR_SCRIPT_CODE[1] = "https://berk.mypinata.cloud/ipfs/QmYeLy8QMqq4Zp4A2zBBtgGT23574G8cDCtpu51TL7XCMB"; // slightly edited chroma.min.js
+        GENERATOR_SCRIPT_CODE[2] = "https://berk.mypinata.cloud/ipfs/QmYxCmfpfu8zqvr1CKcG29pAGGLutTi4Nxju4RaX7Rnc3f"; // ørß1t$ sketch code
 
         setBaseURI("https://orbitsnft.herokuapp.com/api/token/");
+        setGeneratorAddress("https://orbitsnft.herokuapp.com/generator/");
 
-        _safeMint(msg.sender, 0); // I DESERVE THE #0
-        _safeMint(MEMORYCOLLECTOR, 1); // TO MEMORYCOLLECTOR FOR HELPING
-        _safeMint(msg.sender, 2); // I DESERVE THE #2
-        _safeMint(MEMORYCOLLECTOR, 3); // TO MEMORYCOLLECTOR FOR HELPING
-        _safeMint(BASTARDDAO, 4); // TO BASTARDDAO
-        _safeMint(BASTARDDAO, 5); // TO BASTARDDAO
-        _safeMint(BASTARDDAO, 6); // TO BASTARDDAO
-        _safeMint(BASTARDDAO, 7); // TO BASTARDDAO
-        _safeMint(BASTARDDAO, 8); // TO BASTARDDAO
-        _safeMint(BASTARDDAO, 9); // TO BASTARDDAO
-        _safeMint(BASTARDDAO, 10); // TO BASTARDDAO
-        _safeMint(BASTARDDAO, 11); // TO BASTARDDAO
+        setTreasuryAddress(0x63deC16cB2994fA474164066bc8EF606FDc3B9E9);
 
+        _safeMint(BERK, 0); // I DESERVE THE #0
         creationDates[0] = block.number;
-        creators[0] = msg.sender;
+        creators[0] = BERK;
+
+        _safeMint(MEMORYCOLLECTOR, 1); // TO MEMORYCOLLECTOR FOR HELPING
         creationDates[1] = block.number;
         creators[1] = MEMORYCOLLECTOR;
+
+        _safeMint(BERK, 2); // I DESERVE THE #2
         creationDates[2] = block.number;
-        creators[2] = msg.sender;
+        creators[2] = BERK;
+
+        _safeMint(MEMORYCOLLECTOR, 3); // TO MEMORYCOLLECTOR FOR HELPING
         creationDates[3] = block.number;
         creators[3] = MEMORYCOLLECTOR;
+
+        _safeMint(BASTARDDAO, 4); // TO BASTARDDAO, BECAUSE WE LOVE THE BASTARDS
         creationDates[4] = block.number;
         creators[4] = BASTARDDAO;
+
+        _safeMint(BASTARDDAO, 5); // TO BASTARDDAO, BECAUSE WE LOVE THE BASTARDS
         creationDates[5] = block.number;
         creators[5] = BASTARDDAO;
+
+        _safeMint(BASTARDDAO, 6); // TO BASTARDDAO, BECAUSE WE LOVE THE BASTARDS
         creationDates[6] = block.number;
         creators[6] = BASTARDDAO;
+
+        _safeMint(BASTARDDAO, 7); // TO BASTARDDAO, BECAUSE WE LOVE THE BASTARDS
         creationDates[7] = block.number;
         creators[7] = BASTARDDAO;
+
+        _safeMint(BASTARDDAO, 8); // TO BASTARDDAO, BECAUSE WE LOVE THE BASTARDS
         creationDates[8] = block.number;
         creators[8] = BASTARDDAO;
-        creationDates[9] = block.number;
-        creators[9] = BASTARDDAO;
-        // script = "class Random{constructor(e){this.seed=e}random_dec(){return this.seed^=this.seed<<13,this.seed^=this.seed>>17,this.seed^=this.seed<<5,(this.seed<0?1+~this.seed:this.seed)%1e3/1e3}random_between(e,t){return e+(t-e)*this.random_dec()}random_int(e,t){return Math.floor(this.random_between(e,t+1))}random_choice(e){return e[Math.floor(this.random_between(0,.99*e.length))]}}let tiles,tileWidth,tileHeight,palette,tokenData=window.tokenHash,seed=parseInt(tokenData.slice(0,16),16),rng=new Random(seed),VP=Math.min(window.innerHeight,window.innerWidth),WIDTH=VP,HEIGHT=VP,randomness=[],palettes=['FDFDFD-EAEAEA-D8D8D8-C6C6C6-B4B4B4','d3d4d9-4b88a2-bb0a21-252627-fff9fb','c8ffbe-edffab-ba9593-89608e-623b5a','ff9f1c-ffbf69-ffffff-cbf3f0-2ec4b6','555358-5f6062-7b7263-c6ca53-c9dcb3','540d6e-ee4266-ffd23f-f3fcf0-1f271b','1e91d6-0072bb-8fc93a-e4cc37-e18335','ea7af4-b43e8f-6200b3-3b0086-290628','5b5b5b-7d7c7a-c9c19f-edf7d2-edf7b5','333333-839788-eee0cb-baa898-bfd7ea','585123-eec170-f2a65a-f58549-772f1a','fbf5f3-e28413-000022-de3c4b-c42847','0fa3b1-d9e5d6-eddea4-f7a072-ff9b42','10002b-240046-5a189a-9d4edd-e0aaff','0466c8-023e7d-001845-33415c-7d8597','861657-a64253-d56aa0-bbdbb4-fcf0cc','493843-61988e-a0b2a6-cbbfbb-eabda8','031d44-04395e-70a288-dab785-d5896f','ff0a54-ff5c8a-ff85a1-fbb1bd-f7cad0','463f3a-8a817c-bcb8b1-f4f3ee-e0afa0','dd6e42-e8dab2-4f6d7a-c0d6df-eaeaea','ffd6ff-e7c6ff-c8b6ff-b8c0ff-bbd0ff','aa8f66-ed9b40-ffeedb-61c9a8-ba3b46','a57548-fcd7ad-f6c28b-5296a5-82ddf0','713e5a-63a375-edc79b-d57a66-ca6680','114b5f-456990-e4fde1-f45b69-6b2737','edf2fb-e2eafc-ccdbfd-c1d3fe-abc4ff','9cafb7-ead2ac-fe938c-e6b89c-4281a4','7bdff2-b2f7ef-eff7f6-f7d6e0-f2b5d4','ffcdb2-ffb4a2-e5989b-b5838d-6d6875','f2d7ee-d3bcc0-a5668b-69306d-0e103d','ffbe0b-fb5607-ff006e-8338ec-3a86ff','9b5de5-f15bb5-fee440-00bbf9-00f5d4','fee440-f15bb5-9b5de5-00bbf9-00f5d4','181a99-5d93cc-454593-e05328-e28976','F61067-5E239D-00F0B5-6DECAF-F4F4ED','f8f9fa-dee2e6-adb5bd-495057-212529','212529-000000-adb5bd-495057-f8f9fa'].map(e=>e.split('-').map(e=>'#'+e)),tileColors=[],arc$=[],arc$2=[],isFlipping=[],isRounded=!1,radius=0,offs=[],cellColors=[],psuedoFrame=1;function setup(){noiseSeed(seed),randomSeed(seed),createCanvas(WIDTH,HEIGHT),frameRate(60),colorMode(RGB),palette=rng.random_choice(palettes),background(palette[0]),stroke(palette[0]),strokeWeight(0),tiles=rng.random_int(2,16),tileWidth=WIDTH/tiles,tileHeight=HEIGHT/tiles;for(let e=0;e<=tiles;e++){let e=new Array(tiles).fill(null),t=new Array(tiles).fill(null),i=new Array(tiles).fill(null);for(let d=0;d<tiles;d++)e[d]=rng.random_between(0,1),t[d]=palette[rng.random_int(1,4)],i[d]=rng.random_choice(palette);randomness.push(e),tileColors.push(t),cellColors.push(i),isFlipping.push(rng.random_choice([!0,!1])),offs.push(rng.random_between(0,1)),arc$.push(rng.random_choice([45,60])),arc$2.push(rng.random_choice([PI,PI+QUARTER_PI,2*PI]))}noStroke()}function draw(){background(palette[0]);for(let e=0;e<=tiles;e++){for(let t=0;t<tiles;t++){if(fill(cellColors[e][t]),isRounded&&radius>.03?radius-=.02:radius+=.02,push(),fill(tileColors[e][t]),randomness[e][t]>.9)isFlipping[e]?arc(e*tileWidth-tileWidth/2,t*tileHeight+tileWidth/2,.75*tileWidth,.75*tileHeight,.01*radius+offs[e]+mouseX/200,.01*-radius+offs[e]+mouseX/200):arc(e*tileWidth-tileWidth/2,t*tileHeight+tileWidth/2,.75*tileWidth,.75*tileHeight,arc$[e]+offs[e],arc$2[e]+offs[e]);else if(randomness[e][t]>.6)if(randomness[e][t]>.75)if(mouseIsPressed){push();let i=color(tileColors[e][t]);i.setAlpha(256-sin(psuedoFrame/20)*psuedoFrame*7),fill(i),ellipse(e*tileWidth-tileWidth/2,t*tileHeight+tileHeight/2,tileWidth),pop()}else ellipse(e*tileWidth-tileWidth/2,t*tileHeight+tileHeight/2,tileWidth);else randomness[e][t]>.68?arc(e*tileWidth-tileWidth/2,t*tileHeight+tileWidth/2,.75*tileWidth,.75*tileHeight,0,-PI,CHORD):arc(e*tileWidth-tileWidth/2,t*tileHeight+tileWidth/2,.75*tileWidth,.75*tileHeight,PI,TWO_PI,CHORD);else randomness[e][t]>.3?randomness[e][t]>.5?rect(e*tileWidth-tileWidth,t*tileHeight,tileWidth,tileHeight,radius):rect(e*tileWidth-tileWidth,t*tileHeight,tileWidth,tileHeight):randomness[e][t]>.2?triangle(e*tileWidth-tileWidth,t*tileHeight+tileHeight,e*tileWidth,t*tileHeight+tileHeight,e*tileWidth,t*tileHeight):triangle(e*tileWidth-tileWidth,t*tileHeight+tileHeight,e*tileWidth,t*tileHeight,e*tileWidth-tileWidth,t*tileHeight);pop()}radius<=.1?(isRounded=!1,radius=.1):radius>99&&(isRounded=!0,radius=99)}mouseIsPressed?(stroke(palette[0]),strokeWeight(WIDTH/500+40*sin(psuedoFrame/100)),psuedoFrame++):(noStroke(),strokeWeight(0),psuedoFrame=1)}";
+
     }
     
     function tokenLicense(uint _id) public view returns(string memory) {
         require(_id < totalSupply(), "wrong id");
         return ORBITS_LICENSE;
     }
-
 
     function tokensOfOwner(address _owner) external view returns(uint256[] memory ) {
         uint256 tokenCount = balanceOf(_owner);
@@ -2136,26 +2150,40 @@ contract Orbits is ERC721, Ownable {
         }
     }
 
-    function modifyScript(uint _index, string memory _code) public onlyOwner {
-        GENERATOR_SCRIPT_CODE[_index] = _code;
-    }
-
     function freeOrbitForBastard() public {
+        require(hasSaleStarted == true, "Minting isn't open");
         require(FREE_MINT_COUNT < MAX_FREE_MINT, "Sale has already ended");
+        uint mintIndex = totalSupply();
+        require(mintIndex < MAX_TOKENS, "No more orbit left to mint");
         require(IAMABASTARD(BGANPUNKSV2ADDRESS).balanceOf(msg.sender) > 0, "Wallet has no bastards!");
         require(didWalletFreeClaim[msg.sender] == false, "Wallet already used for free mint");
-        uint mintIndex = totalSupply();
+        didWalletFreeClaim[msg.sender] = true;
         _safeMint(msg.sender, mintIndex);
         creationDates[mintIndex] = block.number;
         creators[mintIndex] = msg.sender;
-        didWalletFreeClaim[msg.sender] = true;
         FREE_MINT_COUNT++;
     }
 
-   function mintToken() public payable {
+    function mintOrbit() public payable {
+        require(hasSaleStarted == true, "Minting isn't open");
         require(SALE_COUNT < MAX_SALES, "Sale has already ended");
-        require(msg.value >= PRICE, "Ether value sent is below the price");
         uint mintIndex = totalSupply();
+        require(mintIndex < MAX_TOKENS, "No more orbit left to mint");
+        require(msg.value >= PRICE, "Ether value sent is below the price");
+        require(payable(treasuryAddress).send(msg.value));
+        _safeMint(msg.sender, mintIndex);
+        creationDates[mintIndex] = block.number;
+        creators[mintIndex] = msg.sender;
+        SALE_COUNT++;
+    }
+
+    function mintOrbitWithSOS() public payable {
+        require(hasSaleStarted == true, "Minting isn't open");
+        require(SALE_COUNT < MAX_SALES, "Sale has already ended");
+        uint mintIndex = totalSupply();
+        require(mintIndex < MAX_TOKENS, "No more orbit left to mint");
+        require(SOSTOKEN.allowance(msg.sender, address(this)) >= SOS_PRICE,"Insuficient Allowance");
+        require(SOSTOKEN.transferFrom(msg.sender,treasuryAddress,SOS_PRICE),"transfer Failed");
         _safeMint(msg.sender, mintIndex);
         creationDates[mintIndex] = block.number;
         creators[mintIndex] = msg.sender;
@@ -2163,11 +2191,15 @@ contract Orbits is ERC721, Ownable {
     }
     
     // ONLYOWNER FUNCTIONS
-        
-    function setGeneratorIPFSHash(string memory _hash) public onlyOwner {
-        IPFS_GENERATOR_ADDRESS = _hash;
+
+    function modifyScript(uint _index, string memory _code) public onlyOwner {
+        GENERATOR_SCRIPT_CODE[_index] = _code;
     }
-    
+        
+    function setGeneratorAddress(string memory _address) public onlyOwner {
+        GENERATOR_ADDRESS = _address;
+    }
+
     function setBaseURI(string memory baseURI) public onlyOwner {
         _setBaseURI(baseURI);
     }
@@ -2179,10 +2211,13 @@ contract Orbits is ERC721, Ownable {
     function pauseMint() public onlyOwner {
         hasSaleStarted = false;
     }
-    
-    function withdrawAll() public payable onlyOwner {
-        require(payable(msg.sender).send(address(this).balance));
+    function setTreasuryAddress(address _address) public onlyOwner {
+        treasuryAddress = _address;
     }
+    
+    // function withdrawAll() public payable onlyOwner {
+    //     require(payable(msg.sender).send(address(this).balance));
+    // }
     
     function tokenHash(uint256 tokenId) public view returns(bytes32){
         require(_exists(tokenId), "DOES NOT EXIST");
@@ -2194,10 +2229,4 @@ contract Orbits is ERC721, Ownable {
         return string(abi.encodePacked(GENERATOR_ADDRESS, tokenId.toString()));
     }
     
-    //a contributor added this. could be usefull.
-    
-    function IPFSgeneratorAddress(uint256 tokenId) public view returns (string memory) {
-        require(_exists(tokenId), "DOES NOT EXIST");
-        return string(abi.encodePacked(IPFS_GENERATOR_ADDRESS, tokenId.toString()));
-    }
 }
