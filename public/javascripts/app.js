@@ -32,6 +32,13 @@ $(document).ready(async function () {
         } finally {
             provider = await new ethers.providers.getDefaultProvider(infuraAPI)
             providerRw = await new ethers.providers.Web3Provider(web3.currentProvider)
+
+            if(parseInt(providerRw.provider.chainId) !== 4) {
+                // always make sure you are on the right chain. so users don't lose any money.
+                alert('WRONG NETWORK. WE ARE ON MAINNET ETHEREUM')
+                return
+            }
+            
             console.log(provider,providerRw)
             contract = await new ethers.Contract(contractAddress, ContractABI, provider)
             contractRW = await new ethers.Contract(contractAddress, ContractABI, providerRw.getSigner())
