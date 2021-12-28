@@ -7,6 +7,21 @@ let getAttributes = require('../public/javascripts/metadata')
 /* GET home page. */
 let isBusy;
 // let hash;
+router.get('/token/clear/:id', async function (req, res, next) {
+    try {
+        let id = req.params.id
+        if (id === null || typeof id == "undefined") {
+            res.status(404).json({error: "error"})
+            return
+        }
+        await mc.delete(`token_${id}`)
+        res.status(200).json("ok")
+    } catch (e) {
+        console.log(e)
+        isBusy = false;
+        res.status(404).json({error: "error"})
+    }
+});
 router.get('/token/:id', async function (req, res, next) {
     try {
         let id = req.params.id
