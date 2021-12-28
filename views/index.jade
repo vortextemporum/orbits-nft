@@ -17,7 +17,7 @@ block content
 
                 div.flex.items-center.justify-center.flex-col
                     iframe#showcase(src="/generator/0", style={width: "600px", height: "600px"})
-                    p.text-white ørß1t #0
+                    p.text-white ørß1t$ #0
                 p.text-center.my-6 ------------------------
                 p.text-xl.mt-4.text-pink-100 In 2019, I was heavily influenced by Alexai Shulgin's "Form Art", and one of my first generative visual works using p5.js was making orbiting html radio buttons on browser. The live sketch can be viewed at my website 
                     a(href="https://berkozdemir.com/about").text-red-500 "https://berkozdemir.com/" 
@@ -25,29 +25,29 @@ block content
                     a(href="https://superrare.com/artwork-v2/radiorbit-1-6925").text-red-500 #1 
                     span and 
                     a(href="https://superrare.com/artwork-v2/radiorbit-2-8346").text-red-500 #2
-                    span ). "ørß1t$” is the updated version, rewritten for on-chain generative art purposes; which displays a unique combination of varying object shapes, color palettes & distribution, orbit directions & speeds for every mint. You can click on canvas and move in x-axis to change the overall spinning speed.
+                    span ). "ørß1t” is the updated version, rewritten for on-chain generative art purposes; which displays a unique combination of varying object shapes, color palettes & distribution, orbit directions & speeds for every mint. You can click on canvas and move in x-axis to change the overall spinning speed.
                 p.text-center.my-6 ------------------------
 
                 p.text-lg.mt-4.text-pink-200 I had been in contact with 
                     a(href="https://EthBlock.art").text-red-500 EthBlock.art 
                     span && 
                     a(href="https://artblocks.io").text-red-500 ArtBlocks 
-                    span to release this work, but later I realized that if I can DIY I don't have to release my stuff on such platforms. I wanna thank 
+                    span to release this work, but at the last stage I realized that if I can DIY I don't have to release it on such platforms. I wanna thank 
                     a(href="https://twitter.com/memorycollect0r").text-red-500.font-bold MemoryCollector 
                     span for sharing his 
                     a(href="https://twitter.com/memorycollect0r").text-red-500.font-bold open source generative art infrastructure 
-                    span so I am able to release this project independently.
+                    span so I am able to release this project independently. DIY FOR LIFE! Kudos to teams behind EthBlock.Art and ArtBlocks!
                 p.text-2xl.mt-4.text-yellow-300 HOW DOES IT WORK?
                 p.text-lg.mt-4.text-yellow-300 It is pretty like ArtBlocks structure. You mint a token and a unique hash is generated from your transaction. Then it is used as a seed for the generative art script. The generative art script is deterministic so a generated hash always outputs the same shit. Backend server takes a screenshot from the output, pins the png to IPFS and points it in the token metadata (to be easily viewable on marketplaces).
                 p.text-2xl.mt-4.text-red-400 LICENSING
                 p.text-lg.mt-4.text-red-400 ørß1t$ NFTs comes with DO WHAT THE FUCK YOU WANT WITH IT license. I don't give a shit on how you would use or utilize your NFT. You can even do fortune telling lol
                 p.text-2xl.mt-4.text-green-300 DISTRIBUTION AND PRIMARY SALE
                 p.text-lg.mt-4.text-green-300 - There are 1024 ørß1t$ in total. 
-                p.text-lg.mt-2.text-green-300 - 815 ørß1t$ are going to be sold for 0.0777 ETH OR 42069420.694206946 $SOS
+                p.text-lg.mt-2.text-green-300 - 815 ørß1t$ are going to be sold for 0.0777 ETH OR 42,069,420.69420694206942069 $SOS
                 p.text-lg.mt-2.text-green-300 - 200 ørß1t$ are going to be freely mintable (+ gas) by Bastard Gan Punks V2 holders (1 per wallet).
                 p.text-lg.mt-2.text-green-300 - First 9 ørß1t$ are distributed to me (2), memorycollect0r (2) and BASTARD DAO (5) upon smart contract deployment (WE LOVE THE BASTARDS!).
                 
-                p.text-2xl.mt-4.text-purple-500.font-bold THERE WILL BE NO SECONDARY SALE ROYALTIES
+                //- p.text-2xl.mt-4.text-purple-500.font-bold THERE WILL BE NO SECONDARY SALE ROYALTIES
                 
                 p.text-2xl.mt-4.text-pink-200.font-bold WHAT NEXT???
                 p.text-lg.mt-4.text-pink-200 Since I was able to implement my p5 sketch within this infrastructure, now I am able to think about giving new utility and derivatives to 
@@ -62,15 +62,26 @@ block content
                     a(href="https://www.twitter.com/berkozdemir").text-red-500 twitter 
                 p.text-lg.mt-4.text-pink-200.text-center.font-bold 
                 p.text-lg.mt-4.text-pink-200.text-center.font-bold
-                    span PRINCESS CAMEL music - 
+                    span PRINCESS CAMEL music shill - 
                     a(href="https://open.spotify.com/artist/6yf9s1or7JbsJJ3dOJ6tjf?si=GbBCtkX4QX-FrKSV4mm1pg").text-red-500 spotify 
                     span  / 
                     a(href="https://www.soundcloud.com/berk-aka-princesscamel").text-red-500 soundcloud 
                     span  / 
                     a(href="https://www.audius.co/princesscamel").text-red-500 audius 
+                    span  / 
+                    a(href="https://berkozdemir.bandcamp.com").text-red-500 bandcamp 
                 
+                div#loadingSection.flex.justify-center.my-12
+                    span.text-red-500.text-2xl LOADING CONTRACT DATA. PLEASE WAIT...
+
+                p#saleEnded.text-xl.text-center ALL 1024 ørß1t$ have been minted. Check 
+                    a(href="https://opensea.io/collection/orbits-nft").text-red-500 Opensea
+ 
+
                 div#mintSection
-                    p.text-3xl.my-6.font-bold MINT ørß1t
+                    p.text-3xl.my-6.font-bold.text-center ±±±±±±±±±±±±±±±±±±±±
+                    p.text-3xl.my-6.font-bold.text-center ±±±± MINT ørß1t$ ±±±±
+                    p.text-3xl.my-6.font-bold.text-center ±±±±±±±±±±±±±±±±±±±±
                     
                     //- div.d-flex.flex-column.align-items-center.justify-content-center
                         //- div.loader
@@ -88,37 +99,35 @@ block content
                     
                     p.text-xl.text-red-500 MINT WITH ETH
                     //- a(href="https://opensea.io/collection/chainpots").text-white MINTING PERIOD HAS ENDED. PLEASE VISIT THE OPENSEA.
-                    button#mintButton.mt-4.btn.custom.text-white MINT AN ørß1t FOR 0.0777 ETH
+                    button#mintButton.mt-4.btn.custom.text-white MINT AN ørß1t$ FOR 0.0777 ETH
 
                     p.text-xl.text-red-500.mt-4 FREE CLAIM FOR BASTARD GAN PUNKS V2 HOLDER
-                    button#claimButton.mt-4.btn.custom.text-white MINT AN ørß1t FOR FREE (FOR BGANPUNKSV2 HOLDERS)
+                    button#claimButton.mt-4.btn.custom.text-white MINT AN ørß1t$ FOR FREE (FOR BGANPUNKSV2 HOLDERS)
                     p#bastard-claim.text-lg.mt-4.text-white
                     
                     p.text-xl.text-red-500.mt-4 MINT WITH THEOPENDAO $SOS TOKEN
                     
-                    p.text-lg.text-white.mt-4 I know it is super annoying, but if you wanna mint an ørß1t with your $SOS, you need to give approval to the ørß1t$ smart contract first...
+                    p.text-lg.text-white.mt-4 I know it is super annoying, but if you wanna mint an ørß1t$ with your $SOS, you need to give approval to the ørß1t$ smart contract first...
                     p.text-lg.text-white.mt-4 You can remove allowance to $SOS from REVOKE button below (it will appear if you have allowance for ørß1t$ contract), after you do your mints. Make sure that it writes "0 SOS" on Edit Permission tab on Metamask transaction page. Or you can go to 
                         a(href="https://revoke.cash/").text-red-500 revoke.cash 
                         span to do the task.
 
                     p.text-lg.text-white.mt-4#sos-approval
-                    button#approveSOSButtonUnlimited.mt-4.btn.custom.text-white APPROVE UNLIMITED $SOS
+                    button#approveSOSButtonUnlimited.mt-4.btn.custom.text-white APPROVE MAX $SOS (2^256 - 1)
                     button#approveSOSButton.mt-4.btn.custom.text-white APPROVE $SOS EQUAL TO ONE ORBIT
                     button#revokeSOSButton.mt-4.btn.custom.text-white REVOKE $SOS APPROVAL (AFTER YOU MINT YOUR ORBITS)
-                    button#mintSOSButton.mt-4.btn.custom.text-white MINT AN ørß1t FOR 42,069,420.69420694206942069 $SOS
+                    button#mintSOSButton.mt-4.btn.custom.text-white MINT AN ørß1t$ FOR 42,069,420.69420694206942069 $SOS
                     
         
                 div.row.mt-5.pt-5
                     div.col-12.pt-5
-                        a(href="https://testnets.opensea.io/collection/orbitsnft-fmnwx44kkr").flex.items-center.justify-center.flex-col.font-bold.uppercase View on
+                        a(href="https://opensea.io/collection/orbits-nft").flex.items-center.justify-center.flex-col.font-bold.uppercase View on
                             img(src="https://opensea.io/static/images/logos/opensea.svg", width=40).mt-2
                 div.row.my-6
                     div.text-xl.text-center.font-bold
                         a(href="https://github.com/vortextemporum/orbits-nft/") Github Source Code 
                         span / 
-                        a(href="https://rinkeby.etherscan.io/address/0xada3dc9f454fbfc7e248f2988c38974b8ff96833#code") Smart Contract (Etherscan)
-                            //- br
-                            //- a(href="https://openprocessing.org/sketch/940273") P5 Sketch derivated from the original script
+                        a(href="https://etherscan.io/address/0xada3dc9f454fbfc7e248f2988c38974b8ff96833#code") Smart Contract (Etherscan)
 
 
 

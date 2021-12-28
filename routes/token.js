@@ -60,7 +60,7 @@ router.get('/token/:id', async function (req, res, next) {
         let metadata$ = {
             image,
             hash,
-            name: `ørß1t - #${id}`,
+            name: `ørß1t$ - #${id}`,
             description: `In 2019, I was heavily influenced by Alexai Shulgin's "Form Art", and one of my first generative visual works using p5.js was, orbiting html radio buttons on browser. The live sketch can be viewed at my website "https://berkozdemir.com/", and SuperRare (as radiOrbit #1 and #2). "ørß1t$” is the updated version, rewritten for on-chain generative art purposes; which displays a unique combination of varying object shapes, color palettes & distribution, orbit directions & speeds for every mint. You can click on canvas and move in x-axis to change the overall spinning speed. Love y’all, xoxo`,
             license: `YOUR ørß1t$, YOUR CALL. If you own an ørß1t$ NFT, you are fully permitted to do whatever you want with it (including both non-commercial/commercial uses). You can even do paid fortune telling with it lol.  Also, creative derivative works are highly encouraged.`,
             animation_url: `${baseURI}/generator/${id}`,

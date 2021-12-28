@@ -2069,17 +2069,17 @@ contract Orbits is ERC721, Ownable {
 
     mapping (address => bool) public didWalletFreeClaim;
 
-    address public constant SOSTOKENADDRESS = 0xd9145CCE52D386f254917e481eB44e9943F39138;
     address private BGANPUNKSV2ADDRESS = 0x31385d3520bCED94f77AaE104b406994D8F2168C;
 
-    // address private treasuryAddress;
     address private BERK = 0xc5E08104c19DAfd00Fe40737490Da9552Db5bfE5;
     address private MEMORYCOLLECTOR = 0xEbbCF9D8576376765dba9d883145cEeeE243ad44;
     address private BASTARDDAO = 0x15D0F64FFCf91c39810529F805Cc3595Dc3EF83f;
 
-    IERC20 SOSTOKEN = IERC20(SOSTOKENADDRESS);
+    IERC20 SOSTOKEN = IERC20(0x3b484b82567a09e2588A13D54D032153f0c0aEe0);
 
     constructor() ERC721("ORBITSNFT","ORBITS")  {
+        
+        // MY SKETCH CODE IS SUPER MESSY AND LONG SO I DIDN'T WANT TO INCLUDE IT ALL ONCHAIN, INSTEAD I PINNED IT TO IPFS (INCLUDING DEPENDENCIES). IF MY GATEWAY DOES NOT WORK, TRY IPFS.IO
 
         GENERATOR_SCRIPT_CODE[0] = "https://berk.mypinata.cloud/ipfs/QmTCfmKEeLsLSVAnmhUa1H96A5brNr1RQx8QAfiCbAMRMs"; // p5.min.js
         GENERATOR_SCRIPT_CODE[1] = "https://berk.mypinata.cloud/ipfs/QmYeLy8QMqq4Zp4A2zBBtgGT23574G8cDCtpu51TL7XCMB"; // slightly edited chroma.min.js
@@ -2158,7 +2158,7 @@ contract Orbits is ERC721, Ownable {
 
     function freeOrbitForBastard() public {
         require(hasSaleStarted == true, "Minting isn't open");
-        require(FREE_MINT_COUNT < MAX_FREE_MINT, "Sale has already ended");
+        require(FREE_MINT_COUNT < MAX_FREE_MINT, "No more free mints dear bastard :(");
         uint mintIndex = totalSupply();
         require(mintIndex < MAX_TOKENS, "No more orbit left to mint");
         require(IAMABASTARD(BGANPUNKSV2ADDRESS).balanceOf(msg.sender) > 0, "Wallet has no bastards!");
@@ -2176,7 +2176,6 @@ contract Orbits is ERC721, Ownable {
         uint mintIndex = totalSupply();
         require(mintIndex < MAX_TOKENS, "No more orbit left to mint");
         require(msg.value >= PRICE, "Ether value sent is below the price");
-        // require(payable(treasuryAddress).send(msg.value));
         _safeMint(msg.sender, mintIndex);
         creationDates[mintIndex] = block.number;
         creators[mintIndex] = msg.sender;
@@ -2189,7 +2188,6 @@ contract Orbits is ERC721, Ownable {
         uint mintIndex = totalSupply();
         require(mintIndex < MAX_TOKENS, "No more orbit left to mint");
         require(SOSTOKEN.allowance(msg.sender, address(this)) >= SOS_PRICE,"Insuficient Allowance");
-        // require(SOSTOKEN.transferFrom(msg.sender,treasuryAddress,SOS_PRICE),"transfer Failed");
         require(SOSTOKEN.transferFrom(msg.sender,address(this),SOS_PRICE),"transfer Failed");
         _safeMint(msg.sender, mintIndex);
         creationDates[mintIndex] = block.number;
