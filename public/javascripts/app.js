@@ -39,7 +39,7 @@ $(document).ready(async function () {
             provider = await new ethers.providers.getDefaultProvider(infuraAPI)
             providerRw = await new ethers.providers.Web3Provider(web3.currentProvider)
 
-            if(parseInt(providerRw.provider.chainId) !== 4) {
+            if(parseInt(providerRw.provider.chainId) !== 1) {
                 // always make sure you are on the right chain. so users don't lose any money.
                 alert('WRONG NETWORK. WE ARE ON MAINNET ETHEREUM')
                 return
