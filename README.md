@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# orbits NFT - Next.js Edition
 
-## Getting Started
+A modern rewrite of the orbits generative NFT collection website, migrated from Heroku/Express to Next.js for Cloudflare Pages deployment.
 
-First, run the development server:
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS
+- **Blockchain**: viem for Ethereum interaction
+- **Rendering**: p5.js for generative art
+- **Deployment**: Cloudflare Pages (via OpenNext)
+
+## Features
+
+- **Generator Page** (`/generator/[tokenId]`): Renders the p5.js generative art for each token
+- **Metadata API** (`/api/token/[id]`): Returns OpenSea-compatible JSON metadata
+- **Homepage**: Showcases random tokens with project information
+
+## Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Run production server locally
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deployment to Cloudflare Pages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Option 1: Direct Cloudflare Pages (Recommended)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Connect your GitHub repository to Cloudflare Pages
+2. Set build settings:
+   - Build command: `npm run build`
+   - Build output directory: `.next`
+3. Add environment variables in Cloudflare dashboard:
+   - `RPC_URL` - Your Ethereum RPC endpoint (e.g., Infura, Alchemy)
+   - `NEXT_PUBLIC_BASE_URI` - Your production URL
 
-## Learn More
+### Option 2: Using OpenNext Adapter
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Build for Cloudflare Workers
+npm run cf:build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Test locally with Wrangler
+npm run cf:dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Deploy to Cloudflare
+npm run cf:deploy
+```
 
-## Deploy on Vercel
+## Environment Variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Create a `.env.local` file:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```env
+# Server-side only
+RPC_URL=https://eth.llamarpc.com
+
+# Client-side
+NEXT_PUBLIC_CONTRACT_ADDRESS=0x290841bA121462F90EA527849Bd5302C50B6AFB5
+NEXT_PUBLIC_BASE_URI=https://orbitsnft.art
+```
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── page.tsx              # Homepage
+│   ├── layout.tsx            # Root layout with fonts/meta
+│   ├── globals.css           # Global styles
+│   ├── generator/
+│   │   └── [tokenId]/
+│   │       └── page.tsx      # p5.js visualization
+│   └── api/
+│       └── token/
+│           └── [id]/
+│               └── route.ts  # Metadata API
+└── lib/
+    ├── constants.ts          # Contract address, ABI
+    ├── contract.ts           # viem client setup
+    └── metadata.ts           # Trait generation
+
+public/
+└── javascripts/
+    ├── orbits.js             # Original p5.js script
+    ├── p5.min.js             # p5.js library
+    └── chroma.min.js         # Color library
+```
+
+## Contract
+
+- **Address**: `0x290841bA121462F90EA527849Bd5302C50B6AFB5`
+- **Network**: Ethereum Mainnet
+- **Total Supply**: 1024 tokens (all minted)
+
+## Original Project
+
+Based on [vortextemporum/orbits-nft](https://github.com/vortextemporum/orbits-nft)
+
+## License
+
+CC BY-SA 4.0 (Attribution-ShareAlike)
