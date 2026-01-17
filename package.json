@@ -7,9 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "cf:build": "npx @opennextjs/cloudflare build",
-    "cf:dev": "wrangler dev",
-    "cf:deploy": "wrangler deploy",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "generate-thumbnails": "tsx scripts/generate-thumbnails.ts"
   },
   "dependencies": {
