@@ -7,5 +7,15 @@
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "orbitsnft.art",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.orbitsnft.art",
+      "custom_domain": true
+    }
+  ],
 }
