@@ -1,19 +1,18 @@
-'use client';
+import { useState, useSyncExternalStore } from 'react';
+import { createFileRoute } from '@tanstack/react-router';
+import { TOTAL_SUPPLY } from '@/lib/constants';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
+export const Route = createFileRoute('/')({
+  component: HomePage,
+});
 
-const TOTAL_SUPPLY = 363;
+const subscribe = () => () => {};
 
-export default function HomePage() {
-  const [showcaseId, setShowcaseId] = useState<number>(0);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    // Generate random token ID on client side to avoid hydration mismatch
-    setShowcaseId(Math.floor(Math.random() * TOTAL_SUPPLY));
-    setIsLoaded(true);
-  }, []);
+function HomePage() {
+  // The random token ID only exists on the client, so render the showcase
+  // after hydration to avoid a server/client mismatch
+  const isLoaded = useSyncExternalStore(subscribe, () => true, () => false);
+  const [showcaseId, setShowcaseId] = useState(() => Math.floor(Math.random() * TOTAL_SUPPLY));
 
   const refreshShowcase = () => {
     setShowcaseId(Math.floor(Math.random() * TOTAL_SUPPLY));
@@ -59,7 +58,7 @@ export default function HomePage() {
         </div>
         <div className="mt-4 flex items-center gap-4">
           <p className="text-lg text-gray-300">
-            orbits #{showcaseId}
+            {isLoaded && <>orbits #{showcaseId}</>}
           </p>
           <button
             onClick={refreshShowcase}
@@ -67,13 +66,14 @@ export default function HomePage() {
           >
             Random
           </button>
-          <Link
+          <a
             href={`/generator/${showcaseId}`}
             target="_blank"
+            rel="noopener noreferrer"
             className="px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded-lg transition-colors text-sm"
           >
             Full Screen
-          </Link>
+          </a>
         </div>
       </section>
 

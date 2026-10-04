@@ -13,12 +13,9 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
+# build output
+/dist
+/.tanstack
 
 # misc
 .DS_Store
@@ -33,13 +30,19 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
-# vercel
-.vercel
-
 # typescript
 *.tsbuildinfo
-next-env.d.ts
+worker-configuration.d.ts
 
 # thumbnail generation
 /thumbnails
 .pinata-group-id
+
+# cloudflare
+/.wrangler
+.dev.vars*
+
+# leftovers from the old Next.js build
+/.next
+/.open-next
+next-env.d.ts

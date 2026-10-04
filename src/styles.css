@@ -1,4 +1,8 @@
 @import "tailwindcss";
+@import "@fontsource/play/400.css";
+@import "@fontsource/play/700.css";
+@import "@fontsource/tourney/400.css";
+@import "@fontsource/tourney/700.css";
 
 :root {
   --background: #000000;
@@ -8,30 +12,14 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-play);
-  --font-mono: var(--font-tourney);
+  --font-sans: "Play";
+  --font-mono: "Tourney";
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
-}
-
-/* Generator page styles */
-#generator {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background: #000;
-}
-
-/* Canvas container */
-.stairwayRenderer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
 }
 
 /* Smooth transitions */
