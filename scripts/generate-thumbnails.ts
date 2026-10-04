@@ -14,7 +14,7 @@ import * as dotenv from 'dotenv';
 import * as path from 'path';
 
 // Load environment variables from .env.local
-dotenv.config({ path: path.join(__dirname, '../.env.local') });
+dotenv.config({ path: path.join(import.meta.dirname, '../.env.local') });
 
 import { PinataSDK } from 'pinata';
 import puppeteer from 'puppeteer';
@@ -23,9 +23,9 @@ import * as fs from 'fs';
 const TOTAL_SUPPLY = 363;
 const THUMBNAIL_SIZE = 1000;
 const BASE_URL = 'http://localhost:3000';
-const OUTPUT_DIR = path.join(__dirname, '../thumbnails');
-const HASHES_FILE = path.join(__dirname, '../src/lib/ipfs-hashes.json');
-const GROUP_ID_FILE = path.join(__dirname, '../.pinata-group-id');
+const OUTPUT_DIR = path.join(import.meta.dirname, '../thumbnails');
+const HASHES_FILE = path.join(import.meta.dirname, '../src/lib/ipfs-hashes.json');
+const GROUP_ID_FILE = path.join(import.meta.dirname, '../.pinata-group-id');
 const GROUP_NAME = 'orbits-thumbnails';
 
 // Pinata JWT configuration
@@ -65,7 +65,7 @@ async function getOrCreateGroup(): Promise<string> {
       fs.writeFileSync(GROUP_ID_FILE, existingGroup.id);
       return existingGroup.id;
     }
-  } catch (error) {
+  } catch {
     console.log('Could not list groups, will create new one');
   }
 

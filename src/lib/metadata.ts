@@ -158,7 +158,7 @@ export function getAttributes(hash: string): [Attribute[], Record<string, unknow
   const bglob = Math.round(map(hashData[inc()], 0, 1, 50, 255));
 
   // SHAPE SELECTOR
-  let shapeSequence = [1, 2, 3, 4, 0, 5, 6, 7, 8];
+  const shapeSequence = [1, 2, 3, 4, 0, 5, 6, 7, 8];
   const shapeSequenceNames: Record<number, string> = {
     1: 'TRIANGLE',
     2: 'SQUARE',
@@ -250,9 +250,9 @@ export function getAttributes(hash: string): [Attribute[], Record<string, unknow
     symmetryinOrbitsArray.push(coin2 < 0.2 && numCircless < numCircles ? 'no' : 'yes');
 
     // Consume hash values (matching original pattern)
-    hashData[inc()]; // rot1mul
-    hashData[inc()]; // rot2mul
-    hashData[inc()]; // polarityglob
+    inc(); // rot1mul
+    inc(); // rot2mul
+    inc(); // polarityglob
 
     const ccc1 = Math.round(map(hashData[inc()], 0, 1, 50, 255));
     const ccc2 = Math.round(map(hashData[inc()], 0, 1, 50, 255));
@@ -314,7 +314,7 @@ export function getAttributes(hash: string): [Attribute[], Record<string, unknow
       }
       colorlist.push(colorr);
 
-      hashData[inc()]; // polarity
+      inc(); // polarity
 
       if (whichShapesSelect !== 13) {
         if (areObjectsRotating) {
@@ -325,15 +325,15 @@ export function getAttributes(hash: string): [Attribute[], Record<string, unknow
 
       switch (whichShapesSelect) {
         case 11:
-          hashData[inc()];
+          inc();
           break;
         case 12:
-          hashData[inc()];
-          hashData[inc()];
-          hashData[inc()];
-          hashData[inc()];
-          hashData[inc()];
-          hashData[inc()];
+          inc();
+          inc();
+          inc();
+          inc();
+          inc();
+          inc();
           break;
         default:
           break;

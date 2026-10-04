@@ -1,12 +1,11 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "main": ".open-next/worker.js",
+  "main": "@tanstack/react-start/server-entry",
   "name": "orbits-nft",
-  "compatibility_date": "2024-09-23",
+  "compatibility_date": "2026-09-01",
   "compatibility_flags": ["nodejs_compat"],
-  "assets": {
-    "directory": ".open-next/assets",
-    "binding": "ASSETS"
+  "observability": {
+    "enabled": true
   },
   "routes": [
     {
@@ -17,5 +16,8 @@
       "pattern": "www.orbitsnft.art",
       "custom_domain": true
     }
-  ],
+  ]
+  // Optional: `npx wrangler secret put RPC_URL` (keyed Ethereum RPC, tried
+  // before the public fallbacks in src/lib/constants.ts) and a BASE_URI var
+  // to override the URL used in token metadata.
 }
