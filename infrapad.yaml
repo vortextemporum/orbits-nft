@@ -1,0 +1,29 @@
+version: 1
+project: orbits-nft
+
+shared:
+  - RPC_URL:
+      type: url
+      required: false
+      secret: true
+      description: Keyed Ethereum mainnet JSON-RPC endpoint, tried before the public fallbacks in src/lib/constants.ts.
+
+# The Worker has no bindings; its routes live in wrangler.jsonc.
+apps:
+  worker:
+    path: .
+    env:
+      - BASE_URI:
+          type: url
+          required: false
+          description: Overrides the URL used in token metadata. https://orbitsnft.art when unset.
+
+  # Local only: `npm run generate-thumbnails` reads it. Nothing here is pushed to the Worker.
+  scripts:
+    path: scripts
+    env:
+      - PINATA_JWT:
+          type: string
+          required: false
+          secret: true
+          description: Pinata API JWT, used to upload the generated thumbnails to IPFS.
